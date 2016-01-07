@@ -1,7 +1,7 @@
-//Bayle Smith-Salzberg
+//Team Boba -- Anna Tolen, Bayle Smith-Salzberg, Kate Johnston
 //APCS1 pd10
-//HW34 -- Red v Blue
-//2016-01-05
+//HW55 -- Don't Think You Are, Know You Are
+//2016-01-06
 
 /*====================================
   class Matrix -- models a square matrix
@@ -21,7 +21,7 @@ public class Matrix {
 
     //default constructor intializes a DEFAULT_SIZE*DEFAULT_SIZE matrix
     public Matrix( ) {
-	matrix = new Object[2][2];
+	matrix = new Object[DEFAULT_SIZE][DEFAULT_SIZE];
 
     }
 
@@ -55,7 +55,7 @@ public class Matrix {
 
     //return true if this matrix is empty, false otherwise
     private boolean isEmpty( int r, int c ) {
-	return matrix[r][c]== null;
+	return get(r,c) == null;
 
     }
 
@@ -63,7 +63,7 @@ public class Matrix {
     //overwrite item at specified row and column with newVal
     //return old value
     private Object set( int r, int c, Object newVal ) {
-	Object retVal = matrix[r][c];	
+	Object retVal = get(r,c);	
 	matrix[r][c] = newVal;
 	return retVal;
 
@@ -132,9 +132,20 @@ public class Matrix {
 	}
     }
 
+    //returns if matrix is full
+    public boolean isFull() {
+	for ( int x = 0 ; x < matrix.length ; x++ ) {
+	    for ( int y = 0 ; y < matrix[x].length ; y++ ) {
+		if ( isEmpty(x,y) ) { return false; }
+	    }
+	}
+	return true;
+    }
+
 
     //main method for testing
     public static void main( String[] args ) {
+	
 	Matrix bayle = new Matrix();
 	System.out.println(bayle);
 	System.out.println(bayle.size());
@@ -143,6 +154,7 @@ public class Matrix {
 	System.out.println(bayle);
 	System.out.println(bayle.isEmpty(0,1));
 	System.out.println(bayle.get(0,1));//expecting "hola!"
+	
 	Matrix caleb = new Matrix(6);
 	System.out.println(caleb);
 	System.out.println(caleb.size());
@@ -151,6 +163,7 @@ public class Matrix {
 	System.out.println(caleb.isEmpty(1,4));//false
 	System.out.println(caleb.isEmpty(1,1));//true
 	System.out.println(caleb.get(1,4));//expecting "hola!"
+	
 	Matrix fayanne = caleb;
 	System.out.println(fayanne);
 	System.out.println(fayanne.equals(caleb));//true
@@ -161,6 +174,9 @@ public class Matrix {
 	System.out.println(fayanne);
 	fayanne.swapRows(5,4);
 	System.out.println(fayanne);
+
+	System.out.println(fayanne.isFull());
+	
     }
 
 }//end class Matrix
