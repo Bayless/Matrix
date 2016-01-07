@@ -134,10 +134,41 @@ public class Matrix {
 	}
 	return true;
     }
-    public Object[] getRow( int r ){}
-    public Object[] setRow( int r, Object[] newRow ){}
-    public Object[] getCol( int c ){}
-    public Object[] setCol( int c, Object[] newCol ){}
+       
+    public Object[] getRow( int r ) {
+	Object[] ret = new Object[matrix.length];
+	for( int i = 0; i < matrix.length; i++ ) {
+	    ret[i] = matrix[r][i];
+	}
+	return ret;
+    }
+
+
+    public Object[] setRow( int r, Object[] newRow ) {
+	Object[] hold = getRow(r);
+	for( int i = 0; i < matrix.length; i++ ) {
+	    set(r,i,newRow[i]);
+	}
+	return hold;
+    }
+
+    public Object[] getCol( int c ) {
+	Object[] ret = new Object[matrix[0].length];
+	for( int i = 0; i < matrix[0].length; i++ ) {
+	    ret[i] = matrix[i][c];
+	}
+	return ret;
+    }
+
+    
+    public Object[] setCol( int c, Object[] newCol ) {
+	Object[] hold = getCol(c);
+	for( int i = 0; i < matrix[0].length; i++ ) {
+	    set(i,c,newCol[i]);
+	}
+	return hold;
+    }
+
 	
     public void transpose(){
 	for (int i = 0; i < matrix.length; i+){
