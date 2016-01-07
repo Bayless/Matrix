@@ -35,14 +35,7 @@ public class Matrix {
 
     //return size of this matrix, where size is 1 dimension
     private int size() {
-	int ret = 0;
-	for (int i = 0; i < matrix.length;i++){
-	    for (int x = 0; x < matrix[0].length;x++){
-		ret++;
-	    }
-	}
-	return ret;
-
+	return matrix.length * matrix[0].length;
     }
 
 
@@ -141,7 +134,20 @@ public class Matrix {
 	}
 	return true;
     }
-
+    public Object[] getRow( int r ){}
+    public Object[] setRow( int r, Object[] newRow ){}
+    public Object[] getCol( int c ){}
+    public Object[] setCol( int c, Object[] newCol ){}
+	
+    public void transpose(){
+	for (int i = 0; i < matrix.length; i+){
+	    Object[] oldR = getRow(i);
+	    Object[] oldC = getCol(i);
+	    setRow(i,oldC);
+	    setCol(i,oldR);
+	}
+    }
+	
 
     //main method for testing
     public static void main( String[] args ) {
