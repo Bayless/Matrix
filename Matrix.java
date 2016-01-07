@@ -171,49 +171,67 @@ public class Matrix {
 
 	
     public void transpose(){
-	for (int i = 0; i < matrix.length; i+){
+	for (int i = 0; i < matrix.length; i++){
 	    Object[] oldR = getRow(i);
 	    Object[] oldC = getCol(i);
 	    setRow(i,oldC);
 	    setCol(i,oldR);
 	}
     }
-	
+    public boolean contains( Object o ){
+	for (int i = 0; i <matrix.length;i++){
+	    for (int x = 0; x <matrix[0].length; x++){
+		if (get(i,x).equals(o)){
+		    return true;
+		}
+	    }
+	}
+	return false;
+    }
+	    
 
-    //main method for testing
+	
+//main method for testing
     public static void main( String[] args ) {
-	
-	Matrix bayle = new Matrix();
-	System.out.println(bayle);
-	System.out.println(bayle.size());
-	System.out.println(bayle.get(0,0));//expecting null, hasnt been filled yet
-	bayle.set(0,1,"hola!");
-	System.out.println(bayle);
-	System.out.println(bayle.isEmpty(0,1));
-	System.out.println(bayle.get(0,1));//expecting "hola!"
-	
-	Matrix caleb = new Matrix(6);
-	System.out.println(caleb);
-	System.out.println(caleb.size());
-	System.out.println(caleb.get(0,0));//expecting null, hasnt been filled yet
-	caleb.set(1,4,"hola!");
-	System.out.println(caleb.isEmpty(1,4));//false
-	System.out.println(caleb.isEmpty(1,1));//true
-	System.out.println(caleb.get(1,4));//expecting "hola!"
-	
-	Matrix fayanne = caleb;
-	System.out.println(fayanne);
-	System.out.println(fayanne.equals(caleb));//true
-	System.out.println(fayanne.equals(bayle));//false
-	fayanne.set(4,5,"badG!");
-	System.out.println(fayanne);
-	fayanne.swapColumns(1,4);
-	System.out.println(fayanne);
-	fayanne.swapRows(5,4);
-	System.out.println(fayanne);
+	Matrix george = new Matrix(4);
+	Matrix ginny = new Matrix();
+	for (int i=0; i<4;i++) {
+	    for (int j=0; j<4; j++) {
+		george.set(i,j,i-j+5);
+	    }
+	}
+	System.out.println("george:\n" + george.toString() +
+			   "\nginny:\n" + ginny.toString());
 
-	System.out.println(fayanne.isFull());
-	
+	//quick test for isFull()=======
+	System.out.println("george.isFull():\t" + george.isFull() +
+			   "\nginny.isFull():\t" + ginny.isFull());
+
+	//===========GET/SETrows=========
+	Object[] newRow = new Object[4];
+	for (int i=0; i<4; i++) newRow[i] = i+1;
+	System.out.println("\ngeorge.getRow(2):\t");
+	for (int i=0; i<4; i++) System.out.print((george.get(2,i) + ","));
+	System.out.println("\nAFTER george.setRow(2, [1,2,3,4]):\t");
+	george.setRow(2,newRow);
+	for (int i=0; i<4; i++) System.out.print((george.get(2,i) + ","));
+
+	//===========GET/SET cols=========
+	Object[] newCol = new Object[4];
+	for (int i=0; i<4; i++) newCol[i] = 20-i;
+	System.out.println("\n\ngeorge.getCol(2):\t");
+	for (int i=0; i<4; i++) System.out.print((george.get(2,i)) + ",");
+	System.out.println("\nAFTER george.setCol(r, [20,19,18,17] )");
+	george.setCol(2, newCol);
+	for (int i=0; i<4; i++) System.out.print((george.get(2,i) + ","));
+	System.out.println("\n\ngeorge:\n" + george.toString());
+
+	//===========transpose() + contains=========
+	george.transpose();
+	System.out.println("AFTER TRANSPOSAL:\n" + george.toString());
+
+	System.out.println("george.contains(1):\t" + george.contains(1) +
+			   "\ngeorge.contains(50):\t" + george.contains(50));
     }
 
 }//end class Matrix
